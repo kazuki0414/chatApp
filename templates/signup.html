@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+<body>
+{% load static %} <!-- javaScript、cssの読み込みの際は必ず load staticを記載する-->
+{% block customcss %}
+<link rel='stylesheet' type='text/css' href="{% static 'signup.css'%}">
+{% endblock customcss %}
+
+
+
+{% block header %}
+<div class="signup">
+	<h1>ユーザ登録</h1>
+    <form method="post" action=''>{% csrf_token %}
+
+        {% if error %}
+        {{error}}
+        {% endif %}
+
+    	<input type="text" name="username" placeholder="Username" required="required" />
+        <input type="password" name="password" placeholder="Password" required="required" />
+        <input type="password" name="repassword" placeholder="(再)Password" required="required" />
+        <input type="text" name="fullname" placeholder="氏名" required="required">
+        
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
+    </form>
+</div>
+{% endblock header %}
+</body>

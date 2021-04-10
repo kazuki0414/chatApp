@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load static %} <!-- javaScript、cssの読み込みの際は必ず load staticを記載する-->
+{% block customcss %}
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<link href="{% static 'friendsList.css' %}" rel="stylesheet">
+<script type="text/javascript" src="{% static 'js/friendlist.js' %}"></script>
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+
+{% endblock customcss %}
+
+<body data-spy="scroll" data-offset="58" data-target="#navbar-main"></body>
+
+{% block header %}
+
+
+  <div class="bg"></div> 
+  <div class="bg bg2"></div>
+  <div class="bg bg3"></div>
+
+
+ <div class="tabMenu">
+
+    <a href="{% url 'friendslist' %}" >フレンド一覧</a>
+    <a href="{% url 'friendSearch' %}">フレンド検索</a>
+    <a href="{% url 'logout' %}">ログアウト</a>
+  </div>
+
+{% endblock header %}
+
+{% block content %}
+
+    <h1>フレンド一覧</h1>
+
+    <section id="vertical_tab_nav">
+        <ul>
+          <!-- 　タブを表示する -->
+        　{% for friend in friendList %}
+            <li><a href="index.html">
+                    <img src='{{friend.profile.images.url}}' class="listImages" width=80 height=50>　
+                    {{friend.username}}
+                </a>
+            </li>
+          {% endfor %}
+        </ul>
+  
+        <div>
+
+          {% for friend in friendList %} 
+
+          <article>
+            <!-- ユーザーのプロフィールを表示する -->
+            <h2>{{friend.username}}</h2>
+
+            
+            <p>性別 : {{friend.profile.gender}}</p>
+            <p>生年月日 : {{friend.profile.birth_date}}</p>
+            <p>居住地 : {{friend.profile.location}}</p>
+            <p>話せる言語 : {{friend.profile.favorite_words}}</p>
+            <p id="img"><img src='{{friend.profile.images.url}}' class="listImages" width=30% height=30%></p>
+            <a href="{% url 'friendTalking' friend.pk %}" class="btn btn-primary btn-large" tabindex="-1" role="button" aria-disabled="true">トーク</a>
+            
+          </article>
+
+
+          {% endfor %}
+          
+        </div>
+      </section>
+
+{% endblock content %}
+
+</body>

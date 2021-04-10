@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %} <!-- javaScript、cssの読み込みの際は必ず load staticを記載する-->
+{% block customcss %}
+<link href="{% static 'main.css' %}" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+{% endblock customcss %}
+
+<body data-spy="scroll" data-offset="58" data-target="#navbar-main"></body>
+
+{% block header %}
+<div id="mainview">
+
+  <div class="bg"></div> 
+  <div class="bg bg2"></div>
+  <div class="bg bg3"></div>
+
+
+ <div class="tabMenu">
+
+  <a href="{% url 'friendslist' %}" >フレンド一覧</a>
+  <a href="{% url 'friendSearch' %}">フレンド検索</a>
+  <a href="{% url 'logout' %}">ログアウト</a>
+  </div>
+
+  <div id="content">
+
+
+    
+  </div>
+
+
+{% endblock header %}
+
+</body>

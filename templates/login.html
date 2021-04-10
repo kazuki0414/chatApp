@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+<body>
+{% load static %} <!-- javaScript、cssの読み込みの際は必ず load staticを記載する-->
+{% block customcss %}
+<link rel='stylesheet' type='text/css' href="{% static 'login.css'%}">
+{% endblock customcss %}
+
+
+
+{% block header %}
+<div class="login">
+	<h1>login</h1>
+    <form method="post" action=''>{% csrf_token %}
+    	<input type="text" name="username" placeholder="Username" required="required" />
+        <input type="password" name="password" placeholder="Password" required="required" />
+        <button type="submit" class="btn btn-primary btn-block btn-large">ログイン</button>
+
+        <br><center><a href="{% url 'signup' %}" class="btn btn-primary btn-large" tabindex="-1" role="button" aria-disabled="true">サインアップ</a></center>
+    </form>
+</div>
+{% endblock header %}
+</body>

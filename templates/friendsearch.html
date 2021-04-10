@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% load static %} <!-- javaScript、cssの読み込みの際は必ず load staticを記載する-->
+{% block customcss %}
+<link href="{% static 'friendSearch.css' %}" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+{% endblock customcss %}
+
+<body data-spy="scroll" data-offset="58" data-target="#navbar-main"></body>
+
+{% block header %}
+
+
+  <div class="bg"></div> 
+  <div class="bg bg2"></div>
+  <div class="bg bg3"></div>
+
+
+ <div class="tabMenu">
+
+    <a href="{% url 'friendslist' %}" >フレンド一覧</a>
+    <a href="{% url 'friendSearch' %}">フレンド検索</a>
+    <a href="{% url 'logout' %}">ログアウト</a>
+  </div>
+
+{% endblock header %}
+
+{% block content %}
+
+
+        <div class="content">
+            <h1>フレンド検索</h1>
+            <form action='' method="post">{% csrf_token %}
+            <input type="text" name="friendName" placeholder="ユーザ名" required="required" />
+            <button type="submit" class="btn btn-primary btn-large">ユーザー検索</button><br>
+            </form>
+        </div>
+
+        <div class="list">
+            {% for user in users %}
+            <div class="list1">
+                <div class="list1_1">
+                    <a href="{% url 'friendregister' user.pk %}">{{user.username}}</a><br>
+                    <img src='{{user.profile.images.url}}' class="images" width=100 height=70>
+                </div>
+                <div class="list1_2">
+                   {{user.profile.gender}}<br>
+                   {{user.profile.location}}<br>
+                   {{user.profile.birth_date}}<br>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:"3" and forloop.counter0 != 0 %}
+            <br>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+{% endblock content %}
+
+</body>

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+<body>
+{% load static %} <!-- javaScript、cssの読み込みの際は必ず load staticを記載する-->
+{% block customcss %}
+<link rel='stylesheet' type='text/css' href="{% static 'createProfile.css'%}">
+{% endblock customcss %}
+
+
+
+{% block header %}
+{% if user.is_authenticated %}
+<div class="createProfile">
+	<h1>プロフィール作成</h1>
+    <h2>{{ user.username }}</h2>
+
+    <form method="post" action=''>{% csrf_token %}
+    <input type="file" name="images">
+    性別 : <select name="gender">
+        <option value="man">男</option>
+        <option value="woman">女</option>
+    </select>
+    <input type="text" name="birth_date" placeholder="生年月日(yyyy-MM-DD)" required="required" />
+    <input type="text" name="location" placeholder="居住地" required="required" />
+    <input type="text" name="favorite_words" placeholder="言語" required="required" />
+
+    <button type="submit" class="btn btn-primary btn-block btn-large">プロフィール作成</button>
+    </form>
+</div>
+
+{% else %}
+ログインしてください
+{% endif %}
+{% endblock header %}
+</body>

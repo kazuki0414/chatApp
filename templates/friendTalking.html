@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %} <!-- javaScript、cssの読み込みの際は必ず load staticを記載する-->
+{% block customcss %}
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="{% static 'js/friendTalking.js' %}"></script>
+<link href="{% static 'friendTalk.css' %}" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+
+{% endblock customcss %}
+
+<body data-spy="scroll" data-offset="58" data-target="#navbar-main"></body>
+
+{% block header %}
+
+
+  <div class="bg"></div> 
+  <div class="bg bg2"></div>
+  <div class="bg bg3"></div>
+
+
+ <div class="tabMenu">
+
+    <a href="{% url 'friendslist' %}" >フレンド一覧</a>
+    <a href="{% url 'friendSearch' %}">フレンド検索</a>
+    <a href="{% url 'logout' %}">ログアウト</a>
+  </div>
+
+{% endblock header %}
+
+{% block content %}
+
+    <h1>フレンドトーク</h1>
+
+    <div class="talkview">
+
+        <input id="friendId" type="hidden" value={{friendId}}>
+        <input id="userId" type="hidden" value={{request.user.pk}}>
+
+    </div>
+
+    <input id="id_username" type="text" name="username" placeholder="メッセージ" required="required" />
+    <button id="messagesubmit" class="btn btn-primary btn-block btn-large">送信</button>
+
+{% endblock content %}
+
+</body>
